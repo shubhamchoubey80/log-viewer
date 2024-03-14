@@ -150,7 +150,7 @@ public class LogbackLogFormatTest extends AbstractLogTest {
                 "Authentication failed 100\r");
 
         checkPattern("%date{yyyy-MM-dd HH:mm:ss ZZZZ} [%level] from %logger in %thread - .%M\\(%line\\) - %message%n%xException", event,
-                "2001-02-21 11:22:03 +0530", "INFO", "com.logviewer.formats.LogbackLogFormatTest",
+                "2001-02-21 11:22:03 +0300", "INFO", "com.logviewer.formats.LogbackLogFormatTest",
                 "localhost-startStop-1-EventThread", "invoke0", "-2",
                 "Authentication failed 100\r");
 
@@ -175,7 +175,7 @@ public class LogbackLogFormatTest extends AbstractLogTest {
                 "-2", "Authentication failed 100\r");
 
         checkPattern("%d{yyyy-MM-dd HH:mm:ss, Asia/Seoul} %-10level [%L] [%.-24thread] %logger{50} %ex{30} - %msg%n", event,
-                "2001-02-21 14:52:03", "INFO", "-2", "localhost-startStop-1-Ev", "com.logviewer.formats.LogbackLogFormatTest",
+                "2001-02-21 17:22:03", "INFO", "-2", "localhost-startStop-1-Ev", "com.logviewer.formats.LogbackLogFormatTest",
                 "", "Authentication failed 100\r");
     }
 
