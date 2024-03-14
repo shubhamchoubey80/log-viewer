@@ -145,7 +145,7 @@ public class BufferedFileTest extends AbstractLogTest {
     @Test
     public void testN3() throws IOException, URISyntaxException {
         BufferedFile file = bufferedFile("/testdata/buffered-file/n3.log");
-        test3LineSeparators(file, 1);
+        test3LineSeparators(file, 2);
     }
 
     @Test

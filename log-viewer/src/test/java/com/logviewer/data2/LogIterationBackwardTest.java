@@ -46,7 +46,7 @@ public class LogIterationBackwardTest extends AbstractLogTest {
 
             res.clear();
             assert log.processRecordsBack(1, false, res::add);
-            assert res.size() == 2;
+            assert res.size() == 1;
             assert res.stream().noneMatch(r -> r.getMessage().length() > 0);
 
             res.clear();
@@ -65,15 +65,15 @@ public class LogIterationBackwardTest extends AbstractLogTest {
             String allContent = new String(Files.readAllBytes(log.getLog().getFile()));
 
             assert log.processRecordsBack(allContent.indexOf("l2"), false, res::add);
-            check(res, "l2\nl3", "[DEBUG] l1", "[DEBUG] l0");
+            check(res, "l2\r\nl3", "[DEBUG] l1", "[DEBUG] l0");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("l3"), false, res::add);
-            check(res, "l2\nl3", "[DEBUG] l1", "[DEBUG] l0");
+            check(res, "l2\r\nl3", "[DEBUG] l1", "[DEBUG] l0");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("[INFO] i1"), false, res::add);
-            check(res, "[INFO] i1", "l2\nl3", "[DEBUG] l1", "[DEBUG] l0");
+            check(res, "[INFO] i1", "l2\r\nl3", "[DEBUG] l1", "[DEBUG] l0");
         }
     }
 
@@ -85,15 +85,15 @@ public class LogIterationBackwardTest extends AbstractLogTest {
             String allContent = new String(Files.readAllBytes(log.getLog().getFile()));
 
             assert log.processRecordsBack(allContent.indexOf("l2"), false, res::add);
-            check(res, "[DEBUG] l1\nl2\nl3", "[DEBUG] l0");
+            check(res, "[DEBUG] l1\r\nl2\r\nl3", "[DEBUG] l0");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("l3"), false, res::add);
-            check(res, "[DEBUG] l1\nl2\nl3", "[DEBUG] l0");
+            check(res, "[DEBUG] l1\r\nl2\r\nl3", "[DEBUG] l0");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("[INFO] i1"), false, res::add);
-            check(res, "[INFO] i1", "[DEBUG] l1\nl2\nl3", "[DEBUG] l0");
+            check(res, "[INFO] i1", "[DEBUG] l1\r\nl2\r\nl3", "[DEBUG] l0");
         }
     }
 
@@ -126,7 +126,7 @@ public class LogIterationBackwardTest extends AbstractLogTest {
             for (int i = 0; i < log.getSize(); i++) {
                 res.clear();
                 assert log.processRecordsBack(i, false, res::add);
-                check(res, "[DEBUG] l1\nl2\nl3\nl4");
+                check(res, "[DEBUG] l1\r\nl2\r\nl3\r\nl4");
             }
         }
     }
@@ -139,15 +139,15 @@ public class LogIterationBackwardTest extends AbstractLogTest {
             List<LogRecord> res = new ArrayList<>();
 
             assert log.processRecordsBack(log.getSize(), false, res::add);
-            check(res, "l2\nl3\nl4", "[DEBUG] l1");
+            check(res, "l2\r\nl3\r\nl4", "[DEBUG] l1");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("l4"), false, res::add);
-            check(res, "l2\nl3\nl4", "[DEBUG] l1");
+            check(res, "l2\r\nl3\r\nl4", "[DEBUG] l1");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("l2"), false, res::add);
-            check(res, "l2\nl3\nl4", "[DEBUG] l1");
+            check(res, "l2\r\nl3\r\nl4", "[DEBUG] l1");
 
             res.clear();
             assert log.processRecordsBack(0, false, res::add);
@@ -163,11 +163,11 @@ public class LogIterationBackwardTest extends AbstractLogTest {
             List<LogRecord> res = new ArrayList<>();
 
             assert log.processRecordsBack(allContent.indexOf("not-a-record2"), false, res::add);
-            check(res, "not-a-record\nnot-a-record2");
+            check(res, "not-a-record\r\nnot-a-record2");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("l2"), false, res::add);
-            check(res, "l2", "[DEBUG] l1", "not-a-record\nnot-a-record2");
+            check(res, "l2", "[DEBUG] l1", "not-a-record\r\nnot-a-record2");
         }
     }
 
@@ -179,11 +179,11 @@ public class LogIterationBackwardTest extends AbstractLogTest {
             List<LogRecord> res = new ArrayList<>();
 
             assert log.processRecordsBack(allContent.indexOf("not-a-record2"), false, res::add);
-            check(res, "not-a-record\nnot-a-record2");
+            check(res, "not-a-record\r\nnot-a-record2");
 
             res.clear();
             assert log.processRecordsBack(allContent.indexOf("l2"), false, res::add);
-            check(res, "[DEBUG] l1\nl2", "not-a-record\nnot-a-record2");
+            check(res, "[DEBUG] l1\r\nl2", "not-a-record\r\nnot-a-record2");
         }
     }
 

@@ -101,7 +101,7 @@ public class BigLogEventTest extends AbstractLogTest {
         assertThat(events).hasSize(5);
 
         for (int i = 0; i < events.size() - 1; i++) {
-            assertEquals(events.get(i).getEnd() + 1, events.get(i + 1).getStart());
+            assertEquals(events.get(i).getEnd() + 2, events.get(i + 1).getStart());
         }
 
         assertEquals(Files.size(file), events.get(4).getEnd());

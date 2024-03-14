@@ -279,8 +279,14 @@ public class LvDefaultFormatDetectorTest extends AbstractLogTest {
     private Log4jLogFormat detect(String resourceName) {
         URL url = getClass().getResource(resourceName);
         assert url.getProtocol().equals("file");
+        
+        String filePath = url.getFile();
+        // Remove the leading slash if present
+        if (filePath.startsWith("/")) {
+        	filePath = filePath.substring(1);
+        }
 
-        Path path = Paths.get(url.getFile());
+        Path path = Paths.get(filePath);
         return (Log4jLogFormat) LvDefaultFormatDetector.detectFormat(path);
     }
 

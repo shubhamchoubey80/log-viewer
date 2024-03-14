@@ -125,22 +125,34 @@ public abstract class AbstractLogTest {
     protected String getTestLog(String relativePath) {
         String testFilePath = "/testdata/" + relativePath;
         URL url = AbstractLogTest.class.getResource(testFilePath);
+        String filePath = url.getFile();
+        // Remove the leading slash if present
+        if (filePath.startsWith("/")) {
+        	filePath = filePath.substring(1);
+        }
 
         if (url == null)
             throw new IllegalStateException("Faile to find test data file: " + testFilePath);
 
-        return url.getFile();
+        return filePath;
     }
 
     protected String getTestClassLog() {
         String testFilePath = "/testdata/" + testClassName() + ".log";
         URL url = AbstractLogTest.class.getResource(testFilePath);
 
+        String filePath = url.getFile();
+        // Remove the leading slash if present
+        if (filePath.startsWith("/")) {
+        	filePath = filePath.substring(1);
+        }
+
+        
         if (url == null) {
             throw new IllegalStateException("Faile to find test data file: " + testFilePath);
         }
 
-        return url.getFile();
+        return filePath;
     }
 
     public List<LogRecord> loadLog(String path, LogFormat logFormat) throws IOException {

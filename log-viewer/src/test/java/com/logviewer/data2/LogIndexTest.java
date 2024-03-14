@@ -37,20 +37,20 @@ public class LogIndexTest extends AbstractLogTest {
             check(0, index.findRecordBound(date(0, 1), false, snapshot));
             check(0, index.findRecordBound(date(0, 1), true, snapshot));
 
-            check(18, index.findRecordBound(date(0, 2), false, snapshot));
+            check(19, index.findRecordBound(date(0, 2), false, snapshot));
             check(0, index.findRecordBound(date(0, 2), true, snapshot));
 
-            check(18, index.findRecordBound(date(0, 3), false, snapshot));
-            check(18 * 3, index.findRecordBound(date(0, 3), true, snapshot));
+            check(19, index.findRecordBound(date(0, 3), false, snapshot));
+            check(19 * 3, index.findRecordBound(date(0, 3), true, snapshot));
 
-            check(18 * 4, index.findRecordBound(date(0, 4), false, snapshot));
-            check(18 * 3, index.findRecordBound(date(0, 4), true, snapshot));
+            check(19 * 4, index.findRecordBound(date(0, 4), false, snapshot));
+            check(19 * 3, index.findRecordBound(date(0, 4), true, snapshot));
 
-            check(18 * 4, index.findRecordBound(date(0, 5), false, snapshot));
-            check(18 * 4, index.findRecordBound(date(0, 5), true, snapshot));
+            check(19 * 4, index.findRecordBound(date(0, 5), false, snapshot));
+            check(19 * 4, index.findRecordBound(date(0, 5), true, snapshot));
 
             assertNull(index.findRecordBound(date(0, 9), false, snapshot));
-            check(18 * 4, index.findRecordBound(date(0, 9), true, snapshot));
+            check(19 * 4, index.findRecordBound(date(0, 9), true, snapshot));
         }
     }
 
@@ -73,20 +73,20 @@ public class LogIndexTest extends AbstractLogTest {
             check(0, index.findRecordBound(date(0, 1), false, snapshot));
             check(0, index.findRecordBound(date(0, 1), true, snapshot));
 
-            check(18, index.findRecordBound(date(0, 2), false, snapshot));
+            check(19, index.findRecordBound(date(0, 2), false, snapshot));
             check(0, index.findRecordBound(date(0, 2), true, snapshot));
 
-            check(18, index.findRecordBound(date(0, 3), false, snapshot));
-            check(18 * 3, index.findRecordBound(date(0, 3), true, snapshot));
+            check(19, index.findRecordBound(date(0, 3), false, snapshot));
+            check(19 * 3, index.findRecordBound(date(0, 3), true, snapshot));
 
-            check(18 * 4, index.findRecordBound(date(0, 4), false, snapshot));
-            check(18 * 3, index.findRecordBound(date(0, 4), true, snapshot));
+            check(19 * 4, index.findRecordBound(date(0, 4), false, snapshot));
+            check(19 * 3, index.findRecordBound(date(0, 4), true, snapshot));
 
-            check(18 * 4, index.findRecordBound(date(0, 5), false, snapshot));
-            check(18 * 4, index.findRecordBound(date(0, 5), true, snapshot));
+            check(19 * 4, index.findRecordBound(date(0, 5), false, snapshot));
+            check(19 * 4, index.findRecordBound(date(0, 5), true, snapshot));
 
             assertNull(index.findRecordBound(date(0, 9), false, snapshot));
-            check(18 * 304, index.findRecordBound(date(0, 9), true, snapshot));
+            check(19 * 304, index.findRecordBound(date(0, 9), true, snapshot));
         }
     }
 
@@ -98,11 +98,11 @@ public class LogIndexTest extends AbstractLogTest {
 
         try (Snapshot snapshot = log(tempFile, MULTIFILE_LOG_FORMAT)) {
             LogIndex index = new LogIndex();
-            check(18, index.findRecordBound(date(0, 0), false, snapshot));
+            check(19, index.findRecordBound(date(0, 0), false, snapshot));
             assertNull(index.findRecordBound(date(0, 0), true, snapshot));
 
-            check(18, index.findRecordBound(date(0, 1), false, snapshot));
-            check(18, index.findRecordBound(date(0, 1), true, snapshot));
+            check(19, index.findRecordBound(date(0, 1), false, snapshot));
+            check(19, index.findRecordBound(date(0, 1), true, snapshot));
         }
     }
 

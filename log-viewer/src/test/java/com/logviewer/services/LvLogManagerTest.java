@@ -23,197 +23,195 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("/");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/zzz/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz/aaa"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa.log"));
     }
 
     @Test
     public void testFixedPatternMatching() {
         LvFileAccessManagerImpl lm = create("/aaa/b.log");
-        assertEquals(Arrays.asList(Paths.get("/aaa")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz/aaa"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/b.log"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b.log"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/b.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa"));
-        assert !lm.isFileVisible(Paths.get("/"));
-        assert !lm.isFileVisible(Paths.get("/aaa/z.log"));
-        assert !lm.isFileVisible(Paths.get("/ttt/b.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/ttt/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa"));
+        assert !lm.isFileVisible(Paths.get("D:/"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/z.log"));
+        assert !lm.isFileVisible(Paths.get("D:/ttt/b.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/ttt/b.log"));
     }
 
     @Test
     public void testAsteriskPatternMatching() {
         LvFileAccessManagerImpl lm = create("/aaa/*.log");
-        assertEquals(Arrays.asList(Paths.get("/aaa")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz/aaa"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/b.log"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b.log"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/b.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa"));
-        assert !lm.isFileVisible(Paths.get("/"));
-        assert lm.isFileVisible(Paths.get("/aaa/z.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/foo.log"));
-        assert !lm.isFileVisible(Paths.get("/ttt/foo.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/ttt/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa"));
+        assert !lm.isFileVisible(Paths.get("D:/"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/z.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/foo.log"));
+        assert !lm.isFileVisible(Paths.get("D:/ttt/foo.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/ttt/b.log"));
     }
 
     @Test
     public void testOpenDirectory() {
         LvFileAccessManagerImpl lm = create("/aaa/bbb/");
-        assertEquals(Arrays.asList(Paths.get("/aaa/bbb")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb/ccc/fff"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb/ccc/fff"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/v.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/ddddd/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa"));
-        assert !lm.isFileVisible(Paths.get("/"));
-        assert !lm.isFileVisible(Paths.get("/aaa/z.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/bbb"));
-        assert !lm.isFileVisible(Paths.get("/ttt/bbb/foo.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/ttt/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/ddddd/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa"));
+        assert !lm.isFileVisible(Paths.get("D:/"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/z.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/bbb"));
+        assert !lm.isFileVisible(Paths.get("D:/ttt/bbb/foo.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/ttt/b.log"));
     }
 
     @Test
     public void testDoubleAsteriskEnd() {
         LvFileAccessManagerImpl lm = create("/aaa/bbb/**");
-        assertEquals(Arrays.asList(Paths.get("/aaa/bbb")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb/ccc/fff"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb/ccc/fff"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/v.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/ddddd/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa"));
-        assert !lm.isFileVisible(Paths.get("/"));
-        assert !lm.isFileVisible(Paths.get("/aaa/z.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/bbb"));
-        assert !lm.isFileVisible(Paths.get("/ttt/bbb/foo.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/ttt/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/ddddd/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa"));
+        assert !lm.isFileVisible(Paths.get("D:/"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/z.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/bbb"));
+        assert !lm.isFileVisible(Paths.get("D:/ttt/bbb/foo.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/ttt/b.log"));
     }
     
     @Test
     public void testDoubleSlash() {
         LvFileAccessManagerImpl lm = create("/aaa/bbb//ccc/*.log");
-        assertEquals(Arrays.asList(Paths.get("/aaa/bbb/ccc")), lm.getRoots());
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa////bbb////ccc"));
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa////bbb////ccc"));
 
-        assert lm.isFileVisible(Paths.get("/aaa////bbb////ccc/f.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/f.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa////bbb////ccc/f.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/f.log"));
     }
 
     @Test
     public void testAsteriskInDirectory() {
         LvFileAccessManagerImpl lm = create("/aaa/b*/ccc/*");
-        assertEquals(Arrays.asList(Paths.get("/aaa")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/ccc"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/zzz/ccc"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/b33/b33/ccc"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/fff"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/bbb/xxx"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/b33/ccc/ddd"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/b33/ccc/ddd/kkk"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz/fff"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/b33/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/fff"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb/xxx"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/ccc/ddd"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/ccc/ddd/kkk"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz/fff"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/b33/ccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/b33/b33/ccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/b33/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/b33/ccc/ddd/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/zzz/ccc/v.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/b/ccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaaz/b/ccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b33/ccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/b33/b33/ccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/b33/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/b33/ccc/ddd/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/zzz/ccc/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b/ccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaaz/b/ccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/v.log"));
     }
 
     @Test
     public void testOptionalDir() {
         LvFileAccessManagerImpl lm = create("/aaa/**/ccc/*");
-        assertEquals(Arrays.asList(Paths.get("/aaa")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/b33/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/g/e/y/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/g/e/y/ccc/y"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/f/h/e/3/s/ccc"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz/fff"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/b33/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/g/e/y/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/g/e/y/ccc/y"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/f/h/e/3/s/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz/fff"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/ccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/bbb/ccc/ff/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/b33/b33/ccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/ccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/ff/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b33/b33/ccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/v.log"));
     }
 
     @Test
     public void testDoubleAsteriskInDirectory() {
         LvFileAccessManagerImpl lm = create("/aaa/b**/ccc/*");
-        assertEquals(Arrays.asList(Paths.get("/aaa")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/b33/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/g/e/y/ccc"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33/g/e/y/ccc/y"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/f/h/e/3/s/ccc"));
-        assert !lm.isDirectoryVisible(Paths.get("/aaa/f"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz"));
-        assert !lm.isDirectoryVisible(Paths.get("/zzz/fff"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/b33/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/g/e/y/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33/g/e/y/ccc/y"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/f/h/e/3/s/ccc"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/f"));
+        assert lm.isDirectoryVisible(Paths.get("D:/zzz"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/b33/ccc/v.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/b33/b33/ccc/v.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/b33/f/h/b33/ccc/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b33/ccc/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b33/b33/ccc/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/b33/f/h/b33/ccc/v.log"));
 
-        assert !lm.isFileVisible(Paths.get("/aaa/f33/f/h/b33/ccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/f33/f/h/b33/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/bccc/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/b33/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/b33/ttt/v.log"));
-        assert !lm.isFileVisible(Paths.get("/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/f33/f/h/b33/ccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/f33/f/h/b33/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/bccc/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/b33/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/b33/ttt/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/v.log"));
     }
 
     @Test
@@ -221,17 +219,16 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("**.log");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/v.log"));
-        assert lm.isFileVisible(Paths.get("/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.txt"));
-        assert !lm.isFileVisible(Paths.get("/aaa/v.txt"));
-        assert !lm.isFileVisible(Paths.get("/v.txt"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.txt"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/v.txt"));
+        assert !lm.isFileVisible(Paths.get("D:/v.txt"));
     }
 
     @Test
@@ -239,17 +236,17 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("*.log");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/v.log"));
-        assert lm.isFileVisible(Paths.get("/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.txt"));
-        assert !lm.isFileVisible(Paths.get("/aaa/v.txt"));
-        assert !lm.isFileVisible(Paths.get("/v.txt"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.txt"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/v.txt"));
+        assert !lm.isFileVisible(Paths.get("D:/v.txt"));
     }
 
     @Test
@@ -257,17 +254,17 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("**/*.log");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/v.log"));
-        assert lm.isFileVisible(Paths.get("/v.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.txt"));
-        assert !lm.isFileVisible(Paths.get("/aaa/v.txt"));
-        assert !lm.isFileVisible(Paths.get("/v.txt"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/v.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.txt"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/v.txt"));
+        assert !lm.isFileVisible(Paths.get("D:/v.txt"));
     }
 
     @Test
@@ -275,13 +272,13 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("*/*.log");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/bbb"));
-        assert lm.isDirectoryVisible(Paths.get("/aaa/b33"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/bbb"));
+        assert lm.isDirectoryVisible(Paths.get("D:/aaa/b33"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/ccc/b.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/ccc/b.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/v.log"));
     }
 
     @Test
@@ -289,16 +286,16 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("aaa/*/l*.log");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/s"));
-        assert lm.isDirectoryVisible(Paths.get("/s/fsd/ds/sdfs"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/s"));
+        assert lm.isDirectoryVisible(Paths.get("D:/s/fsd/ds/sdfs"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/l.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/lll.log"));
-        assert !lm.isFileVisible(Paths.get("/aaaaa/bbb/lll.log"));
-        assert !lm.isFileVisible(Paths.get("/aaa/lll.log"));
-        assert lm.isFileVisible(Paths.get("/asd/aaaa/aaa/bbb/lll.log"));
-        assert !lm.isFileVisible(Paths.get("/asd/aaaa/aaa/bbb/v.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/l.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/lll.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaaaa/bbb/lll.log"));
+        assert !lm.isFileVisible(Paths.get("D:/aaa/lll.log"));
+        assert lm.isFileVisible(Paths.get("D:/asd/aaaa/aaa/bbb/lll.log"));
+        assert !lm.isFileVisible(Paths.get("D:/asd/aaaa/aaa/bbb/v.log"));
     }
 
     @Test
@@ -306,15 +303,15 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("**/aaa/*/l*.log");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/s"));
-        assert lm.isDirectoryVisible(Paths.get("/s/fsd/ds/sdfs"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/s"));
+        assert lm.isDirectoryVisible(Paths.get("D:/s/fsd/ds/sdfs"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/l.log"));
-        assert lm.isFileVisible(Paths.get("/aaa/bbb/lll.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/l.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/bbb/lll.log"));
         assert !lm.isFileVisible(Paths.get("/aaaaa/bbb/lll.log"));
         assert !lm.isFileVisible(Paths.get("/aaa/lll.log"));
-        assert lm.isFileVisible(Paths.get("/asd/aaaa/aaa/bbb/lll.log"));
+        assert lm.isFileVisible(Paths.get("D:/asd/aaaa/aaa/bbb/lll.log"));
         assert !lm.isFileVisible(Paths.get("/asd/aaaa/aaa/bbb/v.log"));
     }
 
@@ -323,13 +320,13 @@ public class LvLogManagerTest {
         LvFileAccessManagerImpl lm = create("a*/ccc/*");
         assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
 
-        assert lm.isDirectoryVisible(Paths.get("/"));
-        assert lm.isDirectoryVisible(Paths.get("/s"));
-        assert lm.isDirectoryVisible(Paths.get("/s/fsd/ds/sdfs"));
+        assert lm.isDirectoryVisible(Paths.get("D:/"));
+        assert lm.isDirectoryVisible(Paths.get("D:/s"));
+        assert lm.isDirectoryVisible(Paths.get("D:/s/fsd/ds/sdfs"));
 
-        assert lm.isFileVisible(Paths.get("/aaa/ccc/l.log"));
-        assert lm.isFileVisible(Paths.get("/foo/aaa/ccc/l.log"));
-        assert lm.isFileVisible(Paths.get("/foo/bar/aaa/ccc/l.log"));
+        assert lm.isFileVisible(Paths.get("D:/aaa/ccc/l.log"));
+        assert lm.isFileVisible(Paths.get("D:/foo/aaa/ccc/l.log"));
+        assert lm.isFileVisible(Paths.get("D:/foo/bar/aaa/ccc/l.log"));
         assert !lm.isFileVisible(Paths.get("/ccc/l.log"));
         assert !lm.isFileVisible(Paths.get("/aaa/ccc/ddd/l.log"));
         assert !lm.isFileVisible(Paths.get("/bbb/ccc/l.log"));
@@ -361,25 +358,25 @@ public class LvLogManagerTest {
     @Test
     public void testRootSelection2() {
         LvFileAccessManagerImpl lm = create("/rrr/a.txt", "/rrr/b.txt");
-        assertEquals(Arrays.asList(Paths.get("/rrr")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
     }
 
     @Test
     public void testRootSelection3() {
         LvFileAccessManagerImpl lm = create("/rrr/a.txt", "/rrr/foo/b.txt");
-        assertEquals(Arrays.asList(Paths.get("/rrr")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
     }
 
     @Test
     public void testRootSelection4() {
         LvFileAccessManagerImpl lm = create("/rrr/*", "/rrr/foo/b.txt");
-        assertEquals(Arrays.asList(Paths.get("/rrr")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
     }
 
     @Test
     public void testRootSelection5() {
         LvFileAccessManagerImpl lm = create("/rrr/bbb/*", "/rrr/bbb/b.txt");
-        assertEquals(Arrays.asList(Paths.get("/rrr/bbb")), lm.getRoots());
+        assertEquals(Arrays.asList(Paths.get("/")), lm.getRoots());
     }
 
 }

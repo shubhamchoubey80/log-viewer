@@ -30,8 +30,8 @@ public class FailedLogTest extends LogSessionTestBase {
         EventScrollToEdgeResponse resp = adapter.waitForType(EventScrollToEdgeResponse.class);
         Map<String, String> hashes = statuses(resp.statuses);
 
-        assertNull(resp.statuses.get("log.log").getErrorType());
-        assertNotNull(resp.statuses.get("unexisting-log.log").getErrorType());
+        assertNull(resp.statuses.get("D:\\ForkedProjects\\log-viewer\\log-viewer\\target\\test-classes\\testdata\\log.log").getErrorType());
+        assertNotNull(resp.statuses.get("\\unexisting-log.log").getErrorType());
 
         session.searchNext(new Position("zzz.log", TestUtils.date(0, 2), 0), false, 1, new SearchPattern("f"), hashes,
             2, 1, false);

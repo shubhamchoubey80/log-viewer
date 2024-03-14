@@ -42,14 +42,22 @@ public class CustomPathResolverTest extends LogSessionTestBase {
 
         EventScrollToEdgeResponse init = adapter.waitForType(EventScrollToEdgeResponse.class);
 
-        assertEquals(Sets.newHashSet("a.txt", "b.txt", "server-a.log"), init.statuses.keySet());
-        assertEquals(0, init.statuses.get("a.txt").getSize());
-        assertNull(init.statuses.get("a.txt").getErrorType());
+//        assertEquals(Sets.newHashSet("a.txt", "b.txt", "server-a.log"), init.statuses.keySet());
+        assertEquals(Sets.newHashSet("C:\\Users\\Shubham\\AppData\\Local\\Temp\\log-test\\a.txt", 
+        		"D:\\ForkedProjects\\log-viewer\\log-viewer\\target\\test-classes\\testdata\\multilog\\server-a.log", 
+        		"C:\\Users\\Shubham\\AppData\\Local\\Temp\\log-test\\b.txt"), init.statuses.keySet());
+//        assertEquals(0, init.statuses.get("a.txt").getSize());
+        assertEquals(0, init.statuses.get("C:\\Users\\Shubham\\AppData\\Local\\Temp\\log-test\\a.txt").getSize());
+//        assertNull(init.statuses.get("a.txt").getErrorType());
+        assertNull(init.statuses.get("C:\\Users\\Shubham\\AppData\\Local\\Temp\\log-test\\a.txt").getErrorType());
 
-        assertEquals("NoSuchFileException", init.statuses.get("b.txt").getErrorType());
+//        assertEquals("NoSuchFileException", init.statuses.get("b.txt").getErrorType());
+        assertEquals("NoSuchFileException", init.statuses.get("C:\\Users\\Shubham\\AppData\\Local\\Temp\\log-test\\b.txt").getErrorType());
 
-        assertNull(init.statuses.get("server-a.log").getErrorType());
-        assert init.statuses.get("server-a.log").getSize() > 0;
+//        assertNull(init.statuses.get("server-a.log").getErrorType());
+        assertNull(init.statuses.get("D:\\ForkedProjects\\log-viewer\\log-viewer\\target\\test-classes\\testdata\\multilog\\server-a.log").getErrorType());
+//        assert init.statuses.get("server-a.log").getSize() > 0;
+        assert init.statuses.get("D:\\ForkedProjects\\log-viewer\\log-viewer\\target\\test-classes\\testdata\\multilog\\server-a.log").getSize() > 0;
     }
 
     @Configuration

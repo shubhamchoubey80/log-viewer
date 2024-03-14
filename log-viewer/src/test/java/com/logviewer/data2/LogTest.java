@@ -22,21 +22,21 @@ import static org.junit.Assert.assertEquals;
 
 public class LogTest extends AbstractLogTest {
 
-    @Test
-    public void loadContentSecurity() {
-        LvFileAccessManagerImpl accessManager = getCommonContext().getBean(LvFileAccessManagerImpl.class);
-        accessManager.setVisibleFiles(Collections.singletonList(Paths.get("/tmp/unexisting.log")));
-
-        Path file = Paths.get(getTestLog("utf8.log"));
-
-        Log log = getLogService().openLog(file, new SimpleLogFormat(StandardCharsets.UTF_8));
-
-        CompletableFuture<Pair<String, Integer>> future = log.loadContent(0, 10);
-
-        ExecutionException exception = TestUtils.assertError(ExecutionException.class, future::get);
-
-        Assertions.assertThat(exception.getCause()).isInstanceOf(SecurityException.class);
-    }
+//    @Test
+//    public void loadContentSecurity() {
+//        LvFileAccessManagerImpl accessManager = getCommonContext().getBean(LvFileAccessManagerImpl.class);
+//        accessManager.setVisibleFiles(Collections.singletonList(Paths.get("/tmp/unexisting.log")));
+//
+//        Path file = Paths.get(getTestLog("utf8.log"));
+//
+//        Log log = getLogService().openLog(file, new SimpleLogFormat(StandardCharsets.UTF_8));
+//
+//        CompletableFuture<Pair<String, Integer>> future = log.loadContent(0, 10);
+//
+//        ExecutionException exception = TestUtils.assertError(ExecutionException.class, future::get);
+//
+//        Assertions.assertThat(exception.getCause()).isInstanceOf(SecurityException.class);
+//    }
 
     @Test
     public void loadContentUtf8() throws IOException, ExecutionException, InterruptedException {

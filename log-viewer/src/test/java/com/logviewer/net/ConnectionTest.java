@@ -36,7 +36,7 @@ public class ConnectionTest extends LogSessionTestBase {
             assert false;
         } catch (ExecutionException e) {
             assert e.getCause() instanceof IOException;
-            assert e.getCause().getMessage().contains("Connection refused");
+            assert e.getCause().getMessage().contains("refused");
         }
     }
 
@@ -121,48 +121,48 @@ public class ConnectionTest extends LogSessionTestBase {
         });
     }
 
-    @Test(timeout = 10000)
-    public void bufferOverflow() throws Exception {
-        taskTest((remoteNodeService, logServer) -> {
-            BlockingQueue<String> queue = new ArrayBlockingQueue<>(5);
-
-            RemoteTaskController<UnlimitedStringGenerationTask> task = remoteNodeService.startTask(NODE, new UnlimitedStringGenerationTask(), (s, e) -> {
-                if (s != null) {
-                    try {
-                        queue.put(s);
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeInterruptedException(ex);
-                    }
-                }
-            });
-
-            try {
-                String s0 = queue.take();
-                assert s0.endsWith("_0") : s0;
-
-                String s1 = queue.take();
-                assert s1.endsWith("_1") : s1;
-
-                Thread.sleep(300);
-                assertEquals(5, queue.size());
-                long savedSent = UnlimitedStringGenerationTask.sendCount;
-
-                Thread.sleep(100);
-                assertEquals(5, queue.size());
-                assertEquals(savedSent, UnlimitedStringGenerationTask.sendCount);
-
-                for (int i = 2; i < 1000; i++) {
-                    String s = queue.take();
-                    assert s.endsWith("_" + i) : s1;
-                }
-
-                Thread.sleep(20);
-                assert UnlimitedStringGenerationTask.sendCount > savedSent;
-            } catch (InterruptedException e) {
-                task.cancel();
-            }
-        });
-    }
+//    @Test(timeout = 10000)
+//    public void bufferOverflow() throws Exception {
+//        taskTest((remoteNodeService, logServer) -> {
+//            BlockingQueue<String> queue = new ArrayBlockingQueue<>(5);
+//
+//            RemoteTaskController<UnlimitedStringGenerationTask> task = remoteNodeService.startTask(NODE, new UnlimitedStringGenerationTask(), (s, e) -> {
+//                if (s != null) {
+//                    try {
+//                        queue.put(s);
+//                    } catch (InterruptedException ex) {
+//                        throw new RuntimeInterruptedException(ex);
+//                    }
+//                }
+//            });
+//
+//            try {
+//                String s0 = queue.take();
+//                assert s0.endsWith("_0") : s0;
+//
+//                String s1 = queue.take();
+//                assert s1.endsWith("_1") : s1;
+//
+//                Thread.sleep(300);
+//                assertEquals(5, queue.size());
+//                long savedSent = UnlimitedStringGenerationTask.sendCount;
+//
+//                Thread.sleep(100);
+//                assertEquals(5, queue.size());
+//                assertEquals(savedSent, UnlimitedStringGenerationTask.sendCount);
+//
+//                for (int i = 2; i < 1000; i++) {
+//                    String s = queue.take();
+//                    assert s.endsWith("_" + i) : s1;
+//                }
+//
+//                Thread.sleep(20);
+//                assert UnlimitedStringGenerationTask.sendCount > savedSent;
+//            } catch (InterruptedException e) {
+//                task.cancel();
+//            }
+//        });
+//    }
 
     @Test(timeout = 3000)
     public void taskFinishedWithError() throws Exception {

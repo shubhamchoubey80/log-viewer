@@ -23,7 +23,12 @@ import java.util.zip.GZIPOutputStream;
 
 public class LogViewerServlet extends HttpServlet {
 
-    public static final String SPRING_CONTEXT_PROPERTY = "org.springframework.web.context.WebApplicationContext.ROOT";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6050444936784522776L;
+
+	public static final String SPRING_CONTEXT_PROPERTY = "org.springframework.web.context.WebApplicationContext.ROOT";
 
     private static final Pattern[] RESOURCE_PATTERNS = new Pattern[]{
             Pattern.compile("/fa-(?:brands|regular|solid)-\\d+(\\.[0-9a-f]{16})?\\.[a-z0-9]+"),

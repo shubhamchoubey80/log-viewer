@@ -31,9 +31,14 @@ public class LogNavigatorControllerTest extends AbstractLogTest {
 
     private LogNavigatorController.FileItem getFileItem() {
         URL url = getClass().getResource("/test.properties");
+        // Remove the leading slash if present
+        if (url.getFile().startsWith("/")) {
+        	url.getFile().substring(1);
+        }
+        
         assert url.getProtocol().equals("file");
 
-        Path dir = Paths.get(url.getPath()).getParent();
+        Path dir = Paths.get(url.getPath().substring(1)).getParent();
 
         ApplicationContext context = getCommonContext();
 
